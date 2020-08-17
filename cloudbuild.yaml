@@ -1,0 +1,13 @@
+steps:
+
+- id: "executando os testes"
+  name: 'gcr.io/cloud-builders/go:alpine'
+  args: ['go', 'test', '-v', './src']
+ 
+- id: "construindo a imagem"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/[PROJECT_ID]/fc-go-calc:0.0.1','.']
+    
+- id: "push da imagem no container registry"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/[PROJECT_ID]/fc-go-calc:0.0.1']
